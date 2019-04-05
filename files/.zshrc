@@ -305,15 +305,6 @@ function soft_rm()
 }
 alias rm="soft_rm"
 
-# rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-if which rbenv > /dev/null 2>&1; then eval "$(rbenv init -)"; fi
-
-test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
-
-# direnv
-eval "$(direnv hook zsh)"
-
 # anyframe
 if [ `which peco` ]; then
 	fpath=($HOME/.zsh/anyframe(N-/) $fpath)

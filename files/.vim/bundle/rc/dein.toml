@@ -55,43 +55,6 @@ hook_source = '''
 repo = 'kovisoft/slimv'
 
 # ---------------------------------------
-# gtags
-# ---------------------------------------
-
-[[plugins]]
-repo = 'lighttiger2505/gtags.vim'
-hook_add = '''
-    " Options
-    let g:Gtags_Auto_Map = 0
-    let g:Gtags_OpenQuickfixWindow = 1
-    " Keymap
-    " Show definetion of function cousor word on quickfix
-    nmap <silent> K :<C-u>exe("Gtags ".expand('<cword>'))<CR>
-    " Show reference of cousor word on quickfix
-    nmap <silent> R :<C-u>exe("Gtags -r ".expand('<cword>'))<CR>''
-'''
-
-[[plugins]]
-repo = 'jsfaint/gen_tags.vim'
-hook_add = '''
-    " Generate gtags in background
-    let g:gen_tags#gtags_auto_gen = 1
-    " Do not use cache dir, store tags in git dir
-    let g:gen_tags#use_cache_dir = 0
-'''
-
-[[plugins]]
-repo = 'ozelentok/denite-gtags'
-hook_add = '''
-    " Keymap
-    noremap [denite-gtags]  <Nop>
-    nmap ,t [denite-gtags]
-    nnoremap [denite-gtags]d :<C-u>DeniteCursorWord -buffer-name=gtags_def -mode=normal gtags_def<CR>
-    nnoremap [denite-gtags]r :<C-u>DeniteCursorWord -buffer-name=gtags_ref -mode=normal gtags_ref<CR>
-    nnoremap [denite-gtags]c :<C-u>DeniteCursorWord -buffer-name=gtags_context -mode=normal gtags_context<CR>
-'''
-
-# ---------------------------------------
 # syntax hilight
 # ---------------------------------------
 
@@ -102,25 +65,6 @@ repo = 'StanAngeloff/php.vim'
 # ---------------------------------------
 # themes
 # ---------------------------------------
-
-[[plugins]]
-repo = 'iCyMind/NeoSolarized'
-[[plugins]]
-repo = 'zcodes/vim-colors-basic'
-[[plugins]]
-repo = 'NLKNguyen/papercolor-theme'
-[[plugins]]
-repo = 'rakr/vim-one'
-[[plugins]]
-repo = 'jacoborus/tender.vim'
-[[plugins]]
-repo = 'hauleth/blame.vim'
-[[plugins]]
-repo = 'raphamorim/lucario'
-[[plugins]]
-repo = 'dikiaap/minimalist'
-[[plugins]]
-repo = 'cocopon/iceberg.vim'
 
 [[plugins]]
 repo = 'w0rp/ale'
