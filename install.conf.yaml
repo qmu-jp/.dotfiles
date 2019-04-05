@@ -1,0 +1,29 @@
+- defaults:
+    link:
+        create: true
+        relink: true
+        force:  true
+
+- clean: ['~']
+
+- link:
+    ~/.vim: files/.vim
+    ~/.vimbackup: files/.vimbackup
+    ~/.vimundo: files/.vimundo
+    ~/.gitignore: files/.gitignore
+    ~/.tigrc: files/.tigrc
+    ~/.tmux.conf: files/.tmux.conf
+    ~/.vimrc: files/.vimrc
+    ~/.gvimrc: files/.gvimrc
+    ~/.zlogin: files/.zlogin
+    ~/.zlogout: files/.zlogout
+    ~/.zshenv: files/.zshenv
+    ~/.zshrc: files/.zshrc
+    ~/.zsh: files/.zsh
+    ~/.oh-my-zsh: files/.oh-my-zsh
+    ~/.config/nvim: files/.vim
+    ~/.config/nvim/init.vim: files/.vimrc
+    ~/.globalrc: files/.globalrc
+
+- shell:
+    - [git submodule update --init, Installing submodules]

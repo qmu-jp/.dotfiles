@@ -1,0 +1,173 @@
+# ---------------------------------------
+# funtamental plugins
+# ---------------------------------------
+
+[[plugins]]
+repo = 'Shougo/dein.vim'
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+[[plugins]]
+repo = 'Shougo/neoyank.vim'
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+[[plugins]]
+repo = 'h1mesuke/unite-outline'
+[[plugins]]
+repo = 'tomtom/tcomment_vim'
+[[plugins]]
+repo = 'jimsei/winresizer'
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+[[plugins]]
+repo = 'AndrewRadev/splitjoin.vim'
+[[plugins]]
+repo = 'tpope/vim-surround'
+[[plugins]]
+repo = 'vim-scripts/AnsiEsc.vim'
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+if = "has('nvim')"
+on_i = 1
+on_event = 'InsertCharPre'
+hook_source = '''
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#auto_complete_start_length = 1
+  let g:deoplete#enable_camel_case = 0
+  let g:deoplete#enable_ignore_case = 0
+  let g:deoplete#enable_refresh_always = 1
+  let g:deoplete#enable_smart_case = 1
+  let g:deoplete#file#enable_buffer_path = 1
+  let g:deoplete#max_list = 10000
+  inoremap <expr><tab> pumvisible() ? "\<C-n>" :
+        \ neosnippet#expandable_or_jumpable() ?
+        \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
+'''
+
+[[plugins]]
+repo = 'kovisoft/slimv'
+
+# ---------------------------------------
+# gtags
+# ---------------------------------------
+
+[[plugins]]
+repo = 'lighttiger2505/gtags.vim'
+hook_add = '''
+    " Options
+    let g:Gtags_Auto_Map = 0
+    let g:Gtags_OpenQuickfixWindow = 1
+    " Keymap
+    " Show definetion of function cousor word on quickfix
+    nmap <silent> K :<C-u>exe("Gtags ".expand('<cword>'))<CR>
+    " Show reference of cousor word on quickfix
+    nmap <silent> R :<C-u>exe("Gtags -r ".expand('<cword>'))<CR>''
+'''
+
+[[plugins]]
+repo = 'jsfaint/gen_tags.vim'
+hook_add = '''
+    " Generate gtags in background
+    let g:gen_tags#gtags_auto_gen = 1
+    " Do not use cache dir, store tags in git dir
+    let g:gen_tags#use_cache_dir = 0
+'''
+
+[[plugins]]
+repo = 'ozelentok/denite-gtags'
+hook_add = '''
+    " Keymap
+    noremap [denite-gtags]  <Nop>
+    nmap ,t [denite-gtags]
+    nnoremap [denite-gtags]d :<C-u>DeniteCursorWord -buffer-name=gtags_def -mode=normal gtags_def<CR>
+    nnoremap [denite-gtags]r :<C-u>DeniteCursorWord -buffer-name=gtags_ref -mode=normal gtags_ref<CR>
+    nnoremap [denite-gtags]c :<C-u>DeniteCursorWord -buffer-name=gtags_context -mode=normal gtags_context<CR>
+'''
+
+# ---------------------------------------
+# syntax hilight
+# ---------------------------------------
+
+[[plugins]]
+repo = 'StanAngeloff/php.vim'
+
+
+# ---------------------------------------
+# themes
+# ---------------------------------------
+
+[[plugins]]
+repo = 'iCyMind/NeoSolarized'
+[[plugins]]
+repo = 'zcodes/vim-colors-basic'
+[[plugins]]
+repo = 'NLKNguyen/papercolor-theme'
+[[plugins]]
+repo = 'rakr/vim-one'
+[[plugins]]
+repo = 'jacoborus/tender.vim'
+[[plugins]]
+repo = 'hauleth/blame.vim'
+[[plugins]]
+repo = 'raphamorim/lucario'
+[[plugins]]
+repo = 'dikiaap/minimalist'
+[[plugins]]
+repo = 'cocopon/iceberg.vim'
+
+[[plugins]]
+repo = 'w0rp/ale'
+
+[[plugins]]
+    repo = 'Shougo/vimproc.vim'
+    hook_post_update = '''
+    if dein#util#_is_windows()
+        let cmd = 'tools\\update-dll-mingw'
+    elseif dein#util#_is_cygwin()
+        let cmd = 'make -f make_cygwin.mak'
+    elseif executable('gmake')
+        let cmd = 'gmake'
+    else
+        let cmd = 'make'
+    endif
+    let g:dein#plugin.build = cmd
+'''
+
+[[plugins]]                               
+repo = 'Shougo/denite.nvim'
+depends = ['neomru.vim']
+on_event = 'BufRead'
+hook_add = '''
+    nnoremap [denite] <Nop>
+    nmap <Space>f [denite]
+    nmap <silent> [denite]f :<C-u>Denite file_rec -highlight-mode-insert=Search -sorters=sorter_word<CR>
+    nmap <silent> [denite]d :<C-u>Denite file -highlight-mode-insert=Search -sorters=sorter_word<CR>
+    nmap <silent> [denite]b :<C-u>Denite buffer -highlight-mode-insert=Search -sorters=sorter_word<CR>
+    nmap <silent> [denite]l :<C-u>Denite line -highlight-mode-insert=Search<CR>
+    nmap <silent> [denite]m :<C-u>Denite file_mru -highlight-mode-insert=Search<CR>
+    nmap <silent> [denite]y :<C-u>Denite neoyank -highlight-mode-insert=Search<CR>
+    nmap <silent> [denite]o :<C-u>Denite outline -highlight-mode-insert=Search<CR>
+    nmap <silent> [denite]g :<C-u>Denite grep -highlight-mode-insert=Search<CR>
+    nmap <silent> [denite]p :<C-u>DeniteBufferDir file_rec -highlight-mode-insert=Search<CR>
+    if executable('rg')
+      call denite#custom#var('file_rec', 'command',
+            \ ['rg', '--files', '--glob', '!.git', '!node_modules'])
+      call denite#custom#var('grep', 'command', ['rg'])
+    endi
+'''
+
+hook_post_source = '''
+    call denite#custom#var('file_rec', 'command',
+    \ ['pt', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
+    call denite#custom#var('grep', 'command',
+    \ ['pt', '--nogroup', '--nocolor', '--smart-case', '--hidden'])
+    call denite#custom#var('grep', 'default_opts', [])
+    call denite#custom#var('grep', 'recursive_opts', [])
+'''
