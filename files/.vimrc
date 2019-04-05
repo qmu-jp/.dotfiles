@@ -72,8 +72,8 @@ highlight StatusLineNC ctermfg=240 ctermbg=234
 " color of pane splitter
 set fillchars+=vert:\ 
 set foldcolumn=0
-highlight foldcolumn ctermbg=237 guibg=237
-highlight VertSplit ctermbg=237 guibg=237 guifg=237
+highlight foldcolumn ctermbg=237
+highlight VertSplit ctermbg=237
 
 " vim-indent-guides
 " 奇数インデントのカラー
