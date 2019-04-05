@@ -304,12 +304,3 @@ function soft_rm()
     done
 }
 alias rm="soft_rm"
-
-# anyframe
-if [ `which peco` ]; then
-	fpath=($HOME/.zsh/anyframe(N-/) $fpath)
-	autoload -Uz anyframe-init
-	anyframe-init
-fi
-alias h=anyframe-widget-execute-history
-
